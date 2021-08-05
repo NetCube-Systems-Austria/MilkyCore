@@ -61,9 +61,10 @@
 #include "ntpclient.h"
 #include "httpserver.h"
 #include "telnetserver.h"
+#include "gpio.h"
 
-#define min(a,b) (((a)<(b))?(a):(b))
-#define max(a,b) (((a)>(b))?(a):(b))
+#define _min(a,b) (((a)<(b))?(a):(b))
+#define _max(a,b) (((a)>(b))?(a):(b))
 
 class MilkyCore {
   public:

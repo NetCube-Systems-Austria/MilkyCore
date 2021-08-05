@@ -9,7 +9,7 @@
     vTaskDelay((2000L * configTICK_RATE_HZ) / 1000L);
     while (true) {
       HTTPServer.server.begin();
-      SystemLogger.writeLine(F("[  http  ] Server started!"));
+      SystemLogger.writeLine(F("[  http  ] Server started"));
     
       for (int i = 0; i < HTTP_MAX_CLIENT_THREADS; i++) {
         HTTPServer.clients[i] = EthernetClient();
@@ -26,7 +26,7 @@
             isValid = (HTTPServer.clients[i] == true);
             xTaskResumeAll();
             if (isValid) {
-              SystemLogger.writeLine(F("[  http  ] New client! Creating task..."));
+              SystemLogger.writeLine(F("[  http  ] New client. Creating task..."));
               vTaskDelay((10L * configTICK_RATE_HZ) / 1000L);
               
               portBASE_TYPE threadClientHandler = xTaskCreate(HTTPServer.clientHandlerTask, "HTTP Client Handler", configMINIMAL_STACK_SIZE+200, (void*)i, 4, NULL);
@@ -95,13 +95,28 @@
     
     SystemLogger.write(F("[  http  ] HTTP Client Task "));
     SystemLogger.write(String(clientIndex));
-    SystemLogger.writeLine(F(" ended!"));
+    SystemLogger.writeLine(F(" ended"));
     vTaskDelay((1L * configTICK_RATE_HZ) / 1000L);
     vTaskDelete( NULL );  
   }
 
+  void MilkyHTTPServer::registerUserRequestHandler(uint8_t (*handler)(HttpRequest, EthernetClient)) {
+    userRequestHandlers.push_back(handler);
+  }
+
+  void MilkyHTTPServer::unregisterUserRequestHandler(uint8_t (*handler)(HttpRequest, EthernetClient)) {
+    userRequestHandlers.remove(handler);
+  }
+
   void MilkyHTTPServer::handleHttpRequest(HttpRequest request, EthernetClient client) {
-    sendDefaultStatusPage(client, 200, "OK");
+    for ( list<UserRequestHandler>::iterator handler = userRequestHandlers.begin(); handler != userRequestHandlers.end(); handler++ ) {
+      if ((*handler)(request, client) == 0) return; //If the request was handeled, return.
+    }
+    if (strcmp(request.uri, "/status.cgi") == 0) {
+      sendDefaultStatusPage(client, 200, "OK"); 
+    } else {
+      sendDefaultStatusPage(client, 404, "Not found"); 
+    }
   }
 
   void MilkyHTTPServer::sendHttpHeader(EthernetClient client, int statusCode, char *statusText, char *contentType) {

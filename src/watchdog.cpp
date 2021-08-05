@@ -35,7 +35,7 @@ void MilkyWatchdogHelper::task(void *arg) {
 #ifdef ENABLE_HARDWARE_WATCHDOG
     void MilkyWatchdogHelper::earlyHardwareWatchdogInit() {
       IWatchdog.begin(IWDG_TIMEOUT_MAX);
-      SystemLogger.write(F("[watchdog] Early hardware watchdog now enabled! ("));
+      SystemLogger.write(F("[watchdog] Early hardware watchdog now enabled ("));
       SystemLogger.write(String(IWDG_TIMEOUT_MAX / 1000000));
       SystemLogger.writeLine(F(" sec)"));
     }
@@ -43,7 +43,7 @@ void MilkyWatchdogHelper::task(void *arg) {
     void MilkyWatchdogHelper::hardwareWatchdogInit() {
       IWatchdog.reload();
       IWatchdog.begin(10000000);
-      SystemLogger.writeLine(F("[watchdog] Hardware watchdog now enabled! (10 sec)"));
+      SystemLogger.writeLine(F("[watchdog] Hardware watchdog now enabled (10 sec)"));
     }
 
     void MilkyWatchdogHelper::hardwareWatchdogTick() {
@@ -96,7 +96,7 @@ void MilkyWatchdogHelper::task(void *arg) {
       vTaskDelay((1000L * configTICK_RATE_HZ) / 1000L);
       
       softwareWatchdogEnabled = true;
-      SystemLogger.writeLine(F("[watchdog] Software watchdog now enabled! (5 sec)"));
+      SystemLogger.writeLine(F("[watchdog] Software watchdog now enabled (5 sec)"));
     }
 
     void MilkyWatchdogHelper::softwareWatchdogTick() {

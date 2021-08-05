@@ -3,6 +3,10 @@
 
 #include "MilkyCore.h"
 
+#include <list>
+#include <iterator>
+using namespace std;
+
 #if defined(ENABLE_ETHERNET) && defined(ETHERNET_ENABLE_TELNET)
   #ifndef TELNET_PORT
     #error "Telnet Port not defined. Please define TELNET_PORT"
@@ -18,6 +22,9 @@ class MilkyTelnetServer {
       MilkyTelnetServer(unsigned int port = TELNET_PORT) : server(port) {}
       void init();
       void restart();
+      void registerUserRequestHandler(uint8_t (*handler)(String, String, EthernetClient));
+      void unregisterUserRequestHandler(uint8_t (*handler)(String, String, EthernetClient));
+      typedef uint8_t (*UserRequestHandler)(String, String, EthernetClient);
     #endif
 
   private:
@@ -25,6 +32,7 @@ class MilkyTelnetServer {
       EthernetServer server;
       EthernetClient clients[TELNET_MAX_CLIENT_THREADS];
       HttpRequest requestHandlers[TELNET_MAX_CLIENT_THREADS];
+      list<UserRequestHandler> userRequestHandlers;
 
       static void task(void *arg);
       static void clientHandlerTask(void *i);

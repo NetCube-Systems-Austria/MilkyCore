@@ -1,7 +1,15 @@
 #include "MilkyCore.h"
 
 void MilkyCore::init(void) {
+  pinMode(HEARTBEAT_LED, OUTPUT);
+  pinMode(ERROR_LED, OUTPUT);
+
+  digitalWrite(HEARTBEAT_LED, HIGH);
+  
+  digitalWrite(ERROR_LED, HIGH);
   SystemLogger.init();
+  digitalWrite(ERROR_LED, LOW);
+
   SystemLogger.writeLine(F("\n\n--------------------------------"));
   SystemLogger.write(F("[  main  ] Firmware build ")); SystemLogger.write(__DATE__); SystemLogger.write(" "); SystemLogger.writeLine(__TIME__);
   SystemLogger.write(F("[  main  ] Firmware version ")); SystemLogger.writeLine(__CORE_VERSION__); 

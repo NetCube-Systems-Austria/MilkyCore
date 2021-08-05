@@ -14,7 +14,7 @@ void MilkyConfigHelper::readConfigFromMemory() {
     parameters.store[i] = eepromRead(i);
   }
   xTaskResumeAll();
-  SystemLogger.writeLine(F("[ config ] Configuration read!"));
+  SystemLogger.writeLine(F("[ config ] Configuration read"));
   verifyAndInitializeConfig();
 }
 
@@ -24,7 +24,7 @@ void MilkyConfigHelper::writeConfigToMemory() {
     eepromWrite(i, parameters.store[i]);
   }
   xTaskResumeAll();
-  SystemLogger.writeLine(F("[ config ] Configuration written!"));
+  SystemLogger.writeLine(F("[ config ] Configuration written"));
 }
 
 void MilkyConfigHelper::readMacAddressFromMemory() {
@@ -33,7 +33,7 @@ void MilkyConfigHelper::readMacAddressFromMemory() {
     mac[i] = eepromRead(i + EEPROM_MAC_INDEX);
   }
   xTaskResumeAll();
-  SystemLogger.writeLine(F("[ config ] MAC address read!"));
+  SystemLogger.writeLine(F("[ config ] MAC address read"));
 }
 
 //returns false if config had to be intitialized
@@ -68,7 +68,7 @@ void MilkyConfigHelper::initalizeConfig() {
   parameters.enableDST = true;
   parameters.updateInterval = 15; //Every 15 mins
   
-  SystemLogger.writeLine(F("[ config ] Configuration initialized!"));
+  SystemLogger.writeLine(F("[ config ] Configuration initialized"));
 }
 
 uint8_t MilkyConfigHelper::eepromRead(uint8_t address) {
@@ -91,8 +91,8 @@ void MilkyConfigHelper::eepromWrite(uint8_t address, uint8_t data) {
   Wire.beginTransmission(EEPROMADDR); 
   Wire.write(address);
   Wire.write(data);
-  delay(1);
   Wire.endTransmission();
+  delayMicroseconds(10000);
 }
 
 String MilkyConfigHelper::macAddressToString(byte macAddress[]) {

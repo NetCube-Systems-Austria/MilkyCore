@@ -10,7 +10,7 @@
 
     //-- check if we have an ethernet controller --
     if (Ethernet.hardwareStatus() == EthernetNoHardware) return false;
-    SystemLogger.writeLine(F("[ethernet] Controller found!"));
+    SystemLogger.writeLine(F("[ethernet] Controller found"));
 
     #ifdef ETHERNET_ENABLE_DHCP
       DHCPClient.init(60000, 4000); //Init dhcp client
@@ -26,7 +26,7 @@
       TelnetServer.init();
     #endif
 
-    SystemLogger.writeLine(F("[ethernet] Tasks created!"));
+    SystemLogger.writeLine(F("[ethernet] Tasks created"));
 
     return true;
   }
@@ -51,13 +51,13 @@
           isEthernetReady = true;
           usingDHCP = true;
                          
-          SystemLogger.writeLine(F("[ethernet] Dynamic IP address set!"));
+          SystemLogger.writeLine(F("[ethernet] Dynamic IP address set"));
         }
       }
 
       if (!SystemConfig.parameters.enableDHCP || (SystemConfig.parameters.enableDHCP && SystemConfig.parameters.allowStaticFallback && !dhcpSuccess)) {
         if (SystemConfig.parameters.enableDHCP)
-          SystemLogger.writeLine(F("[ethernet] DHCP failed! Using static fallback!"));
+          SystemLogger.writeLine(F("[ethernet] DHCP failed! Using static fallback"));
         configStaticIP();
       }
     #else
@@ -75,7 +75,7 @@
                    byteArrayToIP(SystemConfig.parameters.netmask));
     isEthernetReady = true;
                  
-    SystemLogger.writeLine(F("[ethernet] Static IP address set!"));
+    SystemLogger.writeLine(F("[ethernet] Static IP address set"));
   }
 
   bool MilkyNetworkHelper::getIsLinkUp() {
@@ -124,10 +124,10 @@
       if (NetworkHelper.wasEthernetReady != NetworkHelper.isEthernetReady) {
         NetworkHelper.wasEthernetReady = NetworkHelper.isEthernetReady;
         if (NetworkHelper.isEthernetReady) {
-          SystemLogger.writeLine(F("[ethernet] Ethernet is now available!"));
+          SystemLogger.writeLine(F("[ethernet] Ethernet is now available"));
           NetworkHelper.restartAllServerTasks();
         } else {
-          SystemLogger.writeLine(F("[ethernet] Ethernet is no longer available!"));
+          SystemLogger.writeLine(F("[ethernet] Ethernet is no longer available"));
         }
       }
 
@@ -176,6 +176,18 @@
       sprintf(buf, "%d", ipAddress[i]);
       s += buf;
       if (i < 3) s += '.';
+    }
+    return s;
+  }
+  
+  String MilkyNetworkHelper::macAddressToString() {
+    String s;
+    for (byte i = 0; i < 6; ++i)
+    {
+      char buf[4];
+      sprintf(buf, "%02x", SystemConfig.mac[i]);
+      s += buf;
+      if (i < 5) s += ':';
     }
     return s;
   }

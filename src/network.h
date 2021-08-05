@@ -18,6 +18,7 @@ class MilkyNetworkHelper {
       IPAddress byteArrayToIP(byte address[4]);
       byte *ipStringToByteArray(String address);
       String ipAddressToString(IPAddress ipAddress);
+      String macAddressToString();
     #endif
 
   private:

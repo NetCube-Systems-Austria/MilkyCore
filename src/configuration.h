@@ -55,7 +55,7 @@ class MilkyConfigHelper
     String macAddressToString(byte macAddress[]);
 
   private:
-    byte magic[4] = {'W','M','S','1'};
+    char magic[4] = {'W','M','S','1'};
     uint8_t eepromRead(uint8_t address);
     void eepromWrite(uint8_t address, uint8_t data);
 };
