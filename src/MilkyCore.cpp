@@ -1,6 +1,6 @@
 #include "MilkyCore.h"
 
-void MilkyCore::init(void) {
+void MilkyCore::earlyInit(void) {
   pinMode(HEARTBEAT_LED, OUTPUT);
   pinMode(ERROR_LED, OUTPUT);
 
@@ -14,6 +14,21 @@ void MilkyCore::init(void) {
   SystemLogger.write(F("[  main  ] Firmware build ")); SystemLogger.write(__DATE__); SystemLogger.write(" "); SystemLogger.writeLine(__TIME__);
   SystemLogger.write(F("[  main  ] Firmware version ")); SystemLogger.writeLine(__CORE_VERSION__); 
   SystemLogger.write(F("[  main  ] FreeRTOS Kernel ")); SystemLogger.writeLine(tskKERNEL_VERSION_NUMBER);
+
+  SystemLogger.writeLine(F("[  main  ] Early system initialisation..."));
+
+  Wire.setSDA(I2C1_SDA);
+  Wire.setSCL(I2C1_SCL);
+  Wire.begin();
+  SystemLogger.writeLine(F("[  main  ] I2C bus initialized"));
+
+  SystemConfig.configurationMemoryInit();
+  SystemConfig.readMacAddressFromMemory();
+  SystemConfig.readConfigFromMemory();
+}
+
+void MilkyCore::init(void) {
+
   SystemLogger.write(F("[  main  ] Starting up...")); SystemLogger.writeLine();
 
   #ifdef ENABLE_HARDWARE_WATCHDOG
@@ -24,9 +39,7 @@ void MilkyCore::init(void) {
     WatchdogHelper.earlySoftwareWatchdogInit();
   #endif
 
-  SystemConfig.configurationMemoryInit();
-  SystemConfig.readMacAddressFromMemory();
-  SystemConfig.readConfigFromMemory();
+  GPIO.init();
 
   SystemLogger.write(F("[  main  ] System Name: ")); SystemLogger.writeLine(SystemConfig.getSystemName());
 
@@ -76,7 +89,7 @@ void MilkyCore::userAppMain(void *arg) {
 
   while (true) {
     loop();
-    vTaskDelay((1000L * configTICK_RATE_HZ) / 1000L);
+    vTaskDelay((1L * configTICK_RATE_HZ) / 1000L);
   }
 }
 

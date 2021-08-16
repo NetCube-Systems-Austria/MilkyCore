@@ -4,7 +4,7 @@
   bool MilkyNetworkHelper::init() {
     portBASE_TYPE threadEthernetCore;
 
-    Ethernet.init(PB15, PB14, PB13, PB12);  // Most Arduino shields
+    Ethernet.init(ETH_MOSI, ETH_MISO, ETH_SCK, ETH_CS);  // Most Arduino shields
     //Ethernet.init(PA7, PA6, PA5, PA4);
     Ethernet.begin(SystemConfig.mac, nullAddress, nullAddress, nullAddress, nullAddress);
 

@@ -7,11 +7,6 @@
 #define ENABLE_SOFTWARE_WATCHDOG
 
 #define ENABLE_HEARTBEAT_LED
-#define HEARTBEAT_LED PB8
-#define ERROR_LED PB9
-
-#define I2C1_SDA PB7
-#define I2C1_SCL PB6
 
 #define ENABLE_RTC
 
@@ -51,6 +46,7 @@
   #endif
 #endif
 
+#include "boarddefs.h"
 #include "logger.h"
 #include "configuration.h"
 #include "watchdog.h"
@@ -68,6 +64,7 @@
 
 class MilkyCore {
   public:
+    void earlyInit();
     void init();
   private:
     static void userAppMain(void *arg);

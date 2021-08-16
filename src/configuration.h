@@ -3,10 +3,6 @@
 
 #include "MilkyCore.h"
 
-#define EEPROMSIZE 0x80
-#define EEPROMADDR 0x50
-#define EEPROM_MAC_INDEX 0xFA
-
 class MilkyConfigHelper
 {
   public:

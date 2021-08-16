@@ -1,11 +1,7 @@
 #include "configuration.h"
 
 void MilkyConfigHelper::configurationMemoryInit() {
-  Wire.setSDA(I2C1_SDA);
-  Wire.setSCL(I2C1_SCL);
-  Wire.begin();
-     
-  SystemLogger.writeLine(F("[ config ] I2C bus initialized"));
+
 }
 
 void MilkyConfigHelper::readConfigFromMemory() {

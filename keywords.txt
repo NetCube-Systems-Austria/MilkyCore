@@ -1,0 +1,64 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+MilkyCore	KEYWORD1
+WatchdogHelper	KEYWORD1
+TelnetServer	KEYWORD1
+SystemRTC	KEYWORD1
+NetworkHelper	KEYWORD1
+Core	KEYWORD1
+SystemLogger	KEYWORD1
+HTTPServer	KEYWORD1
+SystemConfig	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+resetBoard	KEYWORD2
+restart	KEYWORD2
+registerUserRequestHandler	KEYWORD2
+unregisterUserRequestHandler	KEYWORD2
+setEpochTime	KEYWORD2
+getEpochTime	KEYWORD2
+setTimeFromString	KEYWORD2
+setDateFromString	KEYWORD2
+getCurrentDateStr	KEYWORD2
+getCurrentShortDateStr	KEYWORD2
+getCurrentTimeStr	KEYWORD2
+getIsLinkUp	KEYWORD2
+getIsUsingDHCP	KEYWORD2
+getIsEthernetReady	KEYWORD2
+restartAllServerTasks	KEYWORD2
+byteArrayToIP	KEYWORD2
+ipStringToByteArray	KEYWORD2
+ipAddressToString	KEYWORD2
+macAddressToString	KEYWORD2
+init	KEYWORD2
+write	KEYWORD2
+writeLine	KEYWORD2
+sendHttpHeader	KEYWORD2
+mac	KEYWORD2
+parameters	KEYWORD2
+getSystemName	KEYWORD2
+readConfigFromMemory	KEYWORD2
+writeConfigToMemory	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+nullAddress	LITERAL1
+__CORE_VERSION__	LITERAL1
+HEARTBEAT_LED	LITERAL1
+ERROR_LED	LITERAL1
+GPIO_A0	LITERAL1
+GPIO_A1	LITERAL1
+GPIO_A2	LITERAL1
+GPIO_A3	LITERAL1
+GPIO_B0	LITERAL1
+GPIO_B1	LITERAL1
+GPIO_B2	LITERAL1
+GPIO_B3	LITERAL1

@@ -1,5 +1,9 @@
 #include <MilkyCore.h>
 
+//Select the board version/type to be used
+#define WMS_REV_B
+//#define WMS_REV_C
+
 void setup() {
   //Register our request handler with the webserver
   HTTPServer.registerUserRequestHandler(&httpRequestHandler);
