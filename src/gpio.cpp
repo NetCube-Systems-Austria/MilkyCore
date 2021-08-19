@@ -3,6 +3,15 @@
 void LocalIO::init() {
   for (uint8_t pin = 0; pin < 6; pin++)
     expanderPinMode(pin, OUTPUT);
+
+  pinMode(GPIO_A0, INPUT_PULLUP);
+  pinMode(GPIO_A1, INPUT_PULLUP);
+  pinMode(GPIO_A2, INPUT_PULLUP);
+  pinMode(GPIO_A3, INPUT_PULLUP);
+  pinMode(GPIO_B0, INPUT_PULLUP);
+  pinMode(GPIO_B1, INPUT_PULLUP);
+  pinMode(GPIO_B2, INPUT_PULLUP);
+  pinMode(GPIO_B3, INPUT_PULLUP);
 }
 
 uint16_t LocalIO::getAnalog(uint8_t pin) {

@@ -1,9 +1,7 @@
 #ifndef BOARDDEFS_H
     #define BOARDDEFS_H
 
-    #include "MilkyCore.h"
-
-    #ifdef WMS_REV_B
+    #if defined WMS_REV_B
         #define EXT_GPIO0 PA0
         #define EXT_GPIO1 PA1
         #define EXT_GPIO2 PA2
@@ -12,10 +10,6 @@
         #define EXT_GPIO5 PA5
         #define EXT_GPIO6 PA6
         #define EXT_GPIO7 PA7
-
-        #define QBus_EN -1
-        #define QBus_TX -1
-        #define QBus_RX -1
 
         #define GPIO_A0 PA15
         #define GPIO_A1 PB3
@@ -32,7 +26,6 @@
         #define ETH_CS PB12
 
         #define HEARTBEAT_LED PB8
-        #define USER_LED -1
         #define ERROR_LED PB9
 
         #define I2C1_SDA PB7
@@ -42,7 +35,14 @@
         #define EEPROMADDR 0x50
         #define EEPROMSIZE 0x80
         #define EEPROM_MAC_INDEX 0xFA
-    #elif WMS_REV_C
+
+        #define ENABLE_LOGGING
+        #define LOG_DEVICE SerialUSB
+        #define LOG_BAUDRATE 115200
+
+        #define CONSOLE_DEVICE SerialUSB
+        #define CONSOLE_BAUDRATE 115200
+    #elif defined WMS_REV_C
         #define EXT_GPIO0 PA0
         #define EXT_GPIO1 PA1
         #define EXT_GPIO2 PA2
@@ -81,6 +81,13 @@
         #define EEPROMADDR 0x50
         #define EEPROMSIZE 0x80
         #define EEPROM_MAC_INDEX 0xFA
+
+        #define ENABLE_LOGGING
+        #define LOG_DEVICE SerialUSB
+        #define LOG_BAUDRATE 115200
+
+        #define CONSOLE_DEVICE SerialUSB
+        #define CONSOLE_BAUDRATE 115200
     #else
         #error "Board Type not defined. Please define 'WMS_REV_B' or 'WMS_REV_C' according to your board version."
     #endif

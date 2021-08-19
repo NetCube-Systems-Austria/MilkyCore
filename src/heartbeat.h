@@ -3,17 +3,13 @@
 
 #include "MilkyCore.h"
 
-#ifdef ENABLE_HEARTBEAT_LED
-  #ifndef HEARTBEAT_LED
-    #error "Heartbeat LED Pin is not defined! Please define HEARTBEAT_LED"
-  #endif
+#ifndef HEARTBEAT_LED
+  #error "Heartbeat LED Pin is not defined! Please define HEARTBEAT_LED"
 #endif
 
 class MilkyHeartbeatHelper {
   public:
-    #ifdef ENABLE_HEARTBEAT_LED
       static void task(void *arg);
-    #endif
   private:
 
 };

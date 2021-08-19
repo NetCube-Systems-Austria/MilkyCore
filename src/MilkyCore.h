@@ -1,29 +1,14 @@
 #ifndef MILKYCORE_H
 #define MILKYCORE_H
 
-#define __CORE_VERSION__ "V0.3.0"
+#define __CORE_VERSION__ "V0.3.4"
 
-#define ENABLE_HARDWARE_WATCHDOG
-#define ENABLE_SOFTWARE_WATCHDOG
+#define WMS_REV_B
 
-#define ENABLE_HEARTBEAT_LED
-
-#define ENABLE_RTC
-
-#define ENABLE_LOGGING
-#define LOG_DEVICE SerialUSB
-#define LOG_BAUDRATE 115200
-
-#define ENABLE_ETHERNET
-#define ETHERNET_ENABLE_DHCP
-#define ETHERNET_ENABLE_NTP
-
-#define ETHERNET_ENABLE_HTTP
 #define HTTP_MAX_CLIENT_THREADS 8
 #define HTTP_CLIENT_TIMEOUT 8
 #define HTTP_PORT 80
 
-#define ETHERNET_ENABLE_TELNET
 #define TELNET_MAX_CLIENT_THREADS 8
 #define TELNET_PORT 23
 
@@ -31,20 +16,10 @@
 #include <STM32FreeRTOS.h>
 #include <SPI.h>
 #include <Wire.h>
-
-#ifdef ENABLE_RTC
-  #include <STM32RTC.h>
-#endif
-
-#ifdef ENABLE_ETHERNET
-  #include <EthernetENC.h>
-  #if defined(ETHERNET_ENABLE_DHCP) || defined(ETHERNET_ENABLE_NTP)
-    #include <EthernetUdp.h>
-  #endif
-  #ifdef ETHERNET_ENABLE_HTTP
-    #include <HttpRequest.h>
-  #endif
-#endif
+#include <STM32RTC.h>
+#include <EthernetENC.h>
+#include <EthernetUdp.h>
+#include <HttpRequest.h>
 
 #include "boarddefs.h"
 #include "logger.h"
@@ -52,12 +27,14 @@
 #include "watchdog.h"
 #include "heartbeat.h"
 #include "rtc.h"
+#include "gpio.h"
 #include "network.h"
 #include "dhcpclient.h"
 #include "ntpclient.h"
 #include "httpserver.h"
 #include "telnetserver.h"
-#include "gpio.h"
+#include "console.h"
+#include "commandhandler.h"
 
 #define _min(a,b) (((a)<(b))?(a):(b))
 #define _max(a,b) (((a)>(b))?(a):(b))
@@ -69,6 +46,7 @@ class MilkyCore {
   private:
     static void userAppMain(void *arg);
     static void systemHelperTask(void *arg);
+    static String coreCommandHandler(String command);
 };
 
 extern MilkyCore Core;

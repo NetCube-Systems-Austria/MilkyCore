@@ -3,15 +3,13 @@
 
 #include "MilkyCore.h"
 
-#ifdef ENABLE_LOGGING
-  #ifndef LOG_DEVICE
-    #error "Logging Device is not defined! Please define LOG_DEVICE"
-  #endif
+#ifndef LOG_DEVICE
+  #error "Logging Device is not defined! Please define LOG_DEVICE"
+#endif
 
-  #ifndef LOG_BAUDRATE
-    #warning "Logging Baudrate not defined. Using default of 115200 baud"
-    #define LOG_BAUDRATE 115200
-  #endif
+#ifndef LOG_BAUDRATE
+  #warning "Logging Baudrate not defined. Using default of 115200 baud"
+  #define LOG_BAUDRATE 115200
 #endif
 
 class MilkyLogger

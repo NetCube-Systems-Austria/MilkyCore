@@ -11,19 +11,15 @@ class MilkyWatchdogHelper
 		void resetBoard();
 		static void task(void *arg);
 
-		#ifdef ENABLE_HARDWARE_WATCHDOG
-		  void earlyHardwareWatchdogInit();
-		  void hardwareWatchdogInit();
-		  void hardwareWatchdogTick();
-		#endif
-
-		#ifdef ENABLE_SOFTWARE_WATCHDOG
-		  static void softwareWatchdogBark(void);
-		  void earlySoftwareWatchdogInit();
-		  void softwareWatchdogInit();
-		  void softwareWatchdogTick();
-		  void setSoftwareWatchdogEnabled(bool enabled);
-		#endif
+	  void earlyHardwareWatchdogInit();
+	  void hardwareWatchdogInit();
+	  void hardwareWatchdogTick();
+	  
+	  static void softwareWatchdogBark(void);
+	  void earlySoftwareWatchdogInit();
+	  void softwareWatchdogInit();
+	  void softwareWatchdogTick();
+	  void setSoftwareWatchdogEnabled(bool enabled);
 
 	private:
 		HardwareTimer *softwareWatchdog = new HardwareTimer(TIM2);

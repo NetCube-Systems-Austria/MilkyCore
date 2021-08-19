@@ -2,28 +2,21 @@
 #define RTC_H
 
 #include "MilkyCore.h"
-
-#ifdef ENABLE_RTC
-  #include <time.h>
-#endif  
+#include <time.h>
 
 class MilkyRTC {
   public:
-    #ifdef ENABLE_RTC  
-      bool init();
-      void setEpochTime(unsigned long epoch);
-      unsigned long getEpochTime();
-      void setTimeFromString(String timeStr);
-      void setDateFromString(String dateStr);
-      char *getCurrentDateStr();
-      char *getCurrentShortDateStr();
-      char *getCurrentTimeStr();
-    #endif  
+    bool init();
+    void setEpochTime(unsigned long epoch);
+    unsigned long getEpochTime();
+    void setTimeFromString(String timeStr);
+    void setDateFromString(String dateStr);
+    char *getCurrentDateStr();
+    char *getCurrentShortDateStr();
+    char *getCurrentTimeStr();
 
   private:
-    #ifdef ENABLE_RTC
-      STM32RTC& rtc = STM32RTC::getInstance();
-    #endif  
+    STM32RTC& rtc = STM32RTC::getInstance();
 };
 
 extern MilkyRTC SystemRTC;
