@@ -183,14 +183,10 @@ class LocalIO {
     uint16_t getAnalog(uint8_t pin);
 
   private:
-    void expanderPinMode(uint8_t pin, uint8_t mode);
     void expanderSetPin(uint8_t pin, uint8_t state);
     uint8_t expanderGetPin(uint8_t pin);
-    void expanderUpdate();
 
-    uint8_t expanderDir = 0;
     uint8_t expanderState = 0;
-    uint8_t expanderRead = 0;
 };
 
 extern LocalIO GPIO;
