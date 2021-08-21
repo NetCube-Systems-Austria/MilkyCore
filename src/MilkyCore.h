@@ -1,7 +1,7 @@
 #ifndef MILKYCORE_H
 #define MILKYCORE_H
 
-#define __CORE_VERSION__ "V0.3.4"
+#define __CORE_VERSION__ "V0.3.5"
 
 #define WMS_REV_B
 

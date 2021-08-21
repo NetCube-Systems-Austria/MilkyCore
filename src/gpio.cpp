@@ -1,14 +1,14 @@
 #include "gpio.h"
 
 void LocalIO::init() {
-  pinMode(GPIO_A0, INPUT_PULLUP);
-  pinMode(GPIO_A1, INPUT_PULLUP);
-  pinMode(GPIO_A2, INPUT_PULLUP);
-  pinMode(GPIO_A3, INPUT_PULLUP);
-  pinMode(GPIO_B0, INPUT_PULLUP);
-  pinMode(GPIO_B1, INPUT_PULLUP);
-  pinMode(GPIO_B2, INPUT_PULLUP);
-  pinMode(GPIO_B3, INPUT_PULLUP);
+  pinMode(GPIO_A0, INPUT);
+  pinMode(GPIO_A1, INPUT);
+  pinMode(GPIO_A2, INPUT);
+  pinMode(GPIO_A3, INPUT);
+  pinMode(GPIO_B0, INPUT);
+  pinMode(GPIO_B1, INPUT);
+  pinMode(GPIO_B2, INPUT);
+  pinMode(GPIO_B3, INPUT);
 }
 
 uint16_t LocalIO::getAnalog(uint8_t pin) {
@@ -33,24 +33,24 @@ uint8_t LocalIO::getDigital(uint8_t pin) {
     case I6: return digitalRead(GPIO_B1);
     case I7: return digitalRead(GPIO_B2);
     case I8: return digitalRead(GPIO_B3);
-    case Q1: return expanderGetPin(1);
-    case Q2: return expanderGetPin(2);
-    case Q3: return expanderGetPin(3);
-    case Q4: return expanderGetPin(4);
-    case Q5: return expanderGetPin(5);
-    case Q6: return expanderGetPin(6);
+    case Q1: return !expanderGetPin(1);
+    case Q2: return !expanderGetPin(2);
+    case Q3: return !expanderGetPin(3);
+    case Q4: return !expanderGetPin(4);
+    case Q5: return !expanderGetPin(5);
+    case Q6: return !expanderGetPin(6);
     default: return 0;
   }
 }
 
 void LocalIO::setDigital(uint8_t pin, uint8_t state) {
   switch (pin) {
-    case Q1: return expanderSetPin(1, state);
-    case Q2: return expanderSetPin(2, state);
-    case Q3: return expanderSetPin(3, state);
-    case Q4: return expanderSetPin(4, state);
-    case Q5: return expanderSetPin(5, state);
-    case Q6: return expanderSetPin(6, state);
+    case Q1: return expanderSetPin(1, !state);
+    case Q2: return expanderSetPin(2, !state);
+    case Q3: return expanderSetPin(3, !state);
+    case Q4: return expanderSetPin(4, !state);
+    case Q5: return expanderSetPin(5, !state);
+    case Q6: return expanderSetPin(6, !state);
   }
 }
 
