@@ -3,6 +3,8 @@
 
 #include "MilkyCore.h"
 
+#define USER_PARAM_SIZE 16
+
 class MilkyConfigHelper
 {
   public:
@@ -33,7 +35,7 @@ class MilkyConfigHelper
         int updateInterval;
 
         //User App Params
-
+        uint8_t userParameters[USER_PARAM_SIZE];
       };
       byte store[EEPROMSIZE];
     } config_t ;
@@ -48,6 +50,8 @@ class MilkyConfigHelper
     void readMacAddressFromMemory();
     char *getSystemName();
     void initalizeConfig();
+    void writeUserParameter(uint8_t index, uint8_t value);
+    uint8_t readUserParameter(uint8_t index);
     String macAddressToString(byte macAddress[]);
 
   private:

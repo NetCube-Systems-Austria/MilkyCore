@@ -25,6 +25,8 @@ registerUserRequestHandler	KEYWORD2
 unregisterUserRequestHandler	KEYWORD2
 registerUserCommandHandler	KEYWORD2
 unregisterUserCommandHandler	KEYWORD2
+writeUserParameter	KEYWORD2
+readUserParameter	KEYWORD2
 setEpochTime	KEYWORD2
 getEpochTime	KEYWORD2
 setTimeFromString	KEYWORD2

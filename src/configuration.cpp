@@ -45,6 +45,16 @@ bool MilkyConfigHelper::verifyAndInitializeConfig() {
 
 char *MilkyConfigHelper::getSystemName() {return parameters.systemName;}
 
+void MilkyConfigHelper::writeUserParameter(uint8_t index, uint8_t value) {
+  if (index > USER_PARAM_SIZE) return;
+  parameters.userParameters[index] = value;
+}
+
+uint8_t MilkyConfigHelper::readUserParameter(uint8_t index) {
+  if (index > USER_PARAM_SIZE) return 0;
+  return parameters.userParameters[index];
+}
+
 void MilkyConfigHelper::initalizeConfig() {
   memcpy(parameters.magicHeader, magic, 4);
   parameters.configVersion = 0;
@@ -63,6 +73,8 @@ void MilkyConfigHelper::initalizeConfig() {
   parameters.timezoneOffset = 1;
   parameters.enableDST = true;
   parameters.updateInterval = 15; //Every 15 mins
+
+  for (uint8_t i = 0; i < USER_PARAM_SIZE; i++) parameters.userParameters[i] = 0x00;
   
   SystemLogger.writeLine(F("[ config ] Configuration initialized"));
 }
